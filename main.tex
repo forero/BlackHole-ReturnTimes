@@ -1,0 +1,305 @@
+% mnras_template.tex 
+%
+% LaTeX template for creating an MNRAS paper
+%
+% v3.0 released 14 May 2015
+% (version numbers match those of mnras.cls)
+%
+% Copyright (C) Royal Astronomical Society 2015
+% Authors:
+% Keith T. Smith (Royal Astronomical Society)
+
+% Change log
+%
+% v3.0 May 2015
+%    Renamed to match the new package name
+%    Version number matches mnras.cls
+%    A few minor tweaks to wording
+% v1.0 September 2013
+%    Beta testing only - never publicly released
+%    First version: a simple (ish) template for creating an MNRAS paper
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic setup. Most papers should leave these options alone.
+\documentclass[fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+\usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+
+% Only include extra packages if you really need them. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+\newcommand{\sm}[0]{$M_\odot$}
+\newcommand{\erf}[1]{\text{erf}\left(#1\right)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+% Title of the paper, and the short title which is used in the headers.
+% Keep the title short and informative.
+\title[Black Hole Return Times]{Return times for black holes after a merger kick: the influence of the stellar fraction}
+
+% The list of authors, and the short list which is used in the headers.
+% If you need two or more lines of authors, add an extra line using \newauthor
+\author[Barbosa and Forero-Romero]{
+J. S. Barbosa$^{1}$ and 
+J. E. Forero-Romero$^{1}$\thanks{E-mail: je.forero@uniandes.edu.co}
+\\
+% List of institutions
+$^{1}$Departamento de F\'isica, Universidad de los Andes, Bogot\'a, Colombia\\
+}
+
+% These dates will be filled out by the publisher
+\date{Accepted XXX. Received YYY; in original form ZZZ}
+
+% Enter the current year, for the copyright statements etc.
+\pubyear{2015}
+
+% Don't change these lines
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+% Abstract of the paper
+\begin{abstract}
+This is a simple template for authors to write new MNRAS papers.
+The abstract should briefly describe the aims, methods, and main results of the paper.
+It should be a single paragraph not more than 250 words (200 words for Letters).
+No references should appear in the abstract.
+\end{abstract}
+
+% Select between one and six entries from the list of approved keywords.
+% Don't make up new ones.
+\begin{keywords}
+keyword1 -- keyword2 -- keyword3
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+Black hole mergers have been confirmed by gravitational wave observations.
+GR predicts that the momentum of the gravitational wave must be compensated
+by the momentum of the resulting black hole, this translates into 
+a black hole kick.
+
+This makes black hole kick a required element into studies of the co-evolution of galaxies and black holes.
+This has been provided in the pioneering studies 
+\citep{2008ApJ...678..780G}, where the subsequent BH trajectory is followed under the effects of dynamical friction and accretion.
+One of the key prediction of these models is the settling time, i.e. the time it takes for the recoiling black hole to return to the center of the galaxy potential. 
+This settling timescale is central to understand the statistics of observational effects such as offset AGNs, black hole deficits in some galaxy populations and changes in the normalization of the $M_{BH}-\sigma_{\star}$ relationship \citep{2011MNRAS.412.2154B}.
+
+In this letter we use numerical methods under spherical symmetry to study the impact of the central stellar density on the settling timescale.
+We use these results to derive a fitting formula for this timescale in terms of the relevant physical variables.
+We foresee that this fitting formula could be implemented in semi-analytic models of galaxy evolution that seek to attain a higher precision in their black hole modelling.
+
+Unless otherwise specified, we use a $\Lambda$-CDM model with a matter density parameter $\Omega_M = 0.309$, $\Omega_\Lambda = 0.6911$, and a baryonic fraction $f_b = 0.156$.
+
+\section{Analytic Estimates}
+
+\section{Numerical Setup}
+
+\subsection{Density Profiles}
+
+We model the galaxy as an spherical system with three components: dark matter, gas and stars \citep{tanaka2009assembly, choksi2017recoiling}. 
+We define $M_{h}$ as the total mass of Dark Matter in the system.
+The amount of baryonic matter is given by the baryonic fraction parameter ($f_b$), and the mass of stars by the stellar fraction parameter ($f_s$). 
+The total stellar mass can be written as  $M_\text{stars}(R_\text{vir}) = f_sf_b M_h$ while the total amount of gaseous mass is $M_\text{gas}(R_\text{vir}) = (1 - f_s)f_bM_h$
+
+\subsubsection{Dark Matter}
+The dark matter halo follows a Navarro-Frenk-White (NFW) profile
+
+\begin{equation}
+\label{eq: dmdensity}
+\rho_\text{DM}(r) = \dfrac{\rho_0^\text{DM}}{\frac{r}{R_s}\left(1 + \frac{r}{R_s}\right)^2}
+\end{equation}
+%
+where $R_s$ is the scale radius.
+Considering a concentration parameter dependent on halo mass and redshift, $c(M_\text{DM}, z)$, we express this distance as $ R_s = R_\text{vir}/c(M_\text{DM}, z)$.
+
+The virial radius at a redshift of $z$ is defined by 
+\begin{equation}
+    R_\text{vir} = \left({\dfrac{M_hG}{100 H(z)^2}}\right)^{1/3}, 
+\end{equation}
+where $H(z)$ is the Hubble parameter and $M_h$ is the halo mass.
+
+This allows us to express $\rho_0^{\text{DM}}$ as 
+\begin{equation}\label{eq: rho0dm}
+		\rho_0^\text{DM} = \dfrac{M_h}{4\pi \left(\dfrac{R_\text{vir}}{c(M_h, z)}\right)^3 \left[\ln\left(1 + c(M_h, z)\right) - \dfrac{c(M_h, z)}{1 + c(M_h, z)}\right]}
+\end{equation}
+		
+We follow \cite{choksi2017recoiling} and use the following dependence with the dark matter halo mass:
+\begin{equation}
+c(M_h, z) = c_0(z)\left(\dfrac{M_h}{10^{13}M_{\odot}}\right)^{\alpha(z)}, 
+\end{equation}
+%			
+with
+\begin{equation}
+c_0(z) = \dfrac{4.58}{2}\left[\left(\dfrac{1 + z}{2.24}\right)^{0.107} + \left(\dfrac{1 + z}{2.24}\right)^{-1.29}\right],
+\end{equation}
+and
+\begin{equation}
+\alpha(z) = -0.0965 \exp\left(-\dfrac{z}{4.06}\right).
+\end{equation}
+
+\subsubsection{Stars}
+
+We model the stellar density as a Hernquist profile \citep{hernquist1990analytical}:
+\begin{equation}\label{eq: sdensity}
+\rho_s(r) = \frac{f_sf_bM_h}{2\pi}\frac{ \mathcal{R}_s}{r}\frac{1}{(r + \mathcal{R}_s)^3},
+\end{equation}
+where $\mathcal{R}_s$ is the stellar scale length.
+This distance is related to the half-mass radius as
+ $R_{1/2} = \left(1 + \sqrt{2}\right)\mathcal{R}_s$.
+In this work we fix the half-mass radius to be $R_{1/2} = 0.01 R_\text{vir}$ 
+
+
+\subsubsection{Gas}
+
+The gas density profile is  described by 
+\begin{equation}\label{eq: rdensity}
+				\rho_\text{gas}(r) = \dfrac{\rho_0^\text{gas}}{\left(1 + \dfrac{r}{r_0}\right)^{2.2}}
+\end{equation}
+for  $r > r_0$ and  $\rho_\text{gas}(r) = \rho_0^\text{gas}$ for $r\leq r_0$.
+		
+The value of the constant $\rho_0^\text{gas}$ can be expressed as XXXXX
+		
+\subsection{Equation of motion}
+
+We obtain the BH trajectory by numerically integrating the equation of motion:
+\begin{equation}\label{eq: equationMotion}
+	\frac{d ^2{\bf r}}{dt^2}= {\bf a}_g + {\bf a}_{\text{DF}} - \frac{\dot{M}_\bullet}{M_\bullet}{\bf r},
+\end{equation}
+where $M$ is the black hole mass , ${\bf a}_{g}$ is the acceleration term due to the gravitational potential of three matter components, ${\bf a}_{DF}$ is the accelaration due to dynamical friction and $\frac{\dot{M}}{M} {\bf v}$ accounts for the deacceleration due to mass accretion of the black hole \citep{tanaka2009assembly, choksi2017recoiling}.  
+
+
+To describe dynamical friction by collisionless matter components (dark matter and stars) we follow the standard Chandrasekhar formula \citep{binney2011galactic, madau2004effect, tanaka2009assembly, choksi2017recoiling}.
+
+\begin{equation}\label{eq: df_cl}
+	{\bf{a}}_\text{DF}^\text{cl} = -\frac{4\pi G^2}{v^3} M_{\bullet} \rho \ln\Lambda\left({\rm erf}(X) - \dfrac{2}{\sqrt{\pi}}Xe^{-X^2}\right){\bf v}
+\end{equation}
+where $\rho$ is the total local density of stars and dark matter, $X = v/(\sqrt{2}\sigma)$ and $\sigma $ is the velocity dispersion that we approximate as a constant$\sigma = \sqrt{GM/2R_{vir}}$.
+We take the Coulomb logarithm at a nominal value of $\ln\Lambda$=3 but keep in mind that changes in this factor can change the return times.
+
+The expressions describing the dynamical friction from the gas are more involved.
+We follow \cite{tanaka2009assembly} and implement a hybrid model for the drag force was proposed in which both subsonic and supersonic velocities are possible. We start with the Mach number definition $\mathcal{M} \equiv {v}/{c_s}$ where 
+where $c_s$ is the local sound speed, which depends on local temperature. 
+We assume that the entire halo is isothermal at the virial temperature ($T_\text{vir}$), which translates into
+
+\begin{equation}\label{eq: soundSpeed}
+c_s = \sqrt{\dfrac{\gamma R}{\mathcal{M}_w}T_\text{vir}} = 
+\sqrt{\dfrac{\gamma R}{\mathcal{M}_w}\left(\dfrac{\mu m_p G M_h}{2k_BR_\text{vir}}\right)} 
+\approx 0.614 \sqrt{\dfrac{M_h}{R_\text{vir}}}\text{ kpcGyr$^{-1}$},
+\end{equation}
+%	
+where $\mu$ is the value of the mean molecular weight of the gas, $\mathcal{M}_w$) is the mean molar mass, $m_p$ is the proton mass and $\gamma$ is the adiabatic index. 
+Approximating the gas to a monoatomic one $\gamma \approx 5/3$, yields the last expression on \autoref{eq: soundSpeed}. 
+
+We then take the gaseous dynamical friction as 
+\begin{equation}\label{eq: df_c}
+a^\text{c}_\text{DF} = -\dfrac{4\pi G^2}{v^3}M_\bullet\rho_\text{gas}f(\mathcal{M}){\bf {v}},
+\end{equation}
+%			
+with
+\begin{equation}
+f(\mathcal{M}) = \left\{
+\begin{matrix}
+0.5\ln\Lambda \left[\erf{\dfrac{\mathcal{M}}{\sqrt{2}}} - \sqrt{\dfrac{2}{\pi}}\mathcal{M}e^{-\mathcal{M}^2/2}\right]& \text{if $\mathcal{M} \leq 0.8$}\\
+1.5\ln\Lambda \left[\erf{\dfrac{\mathcal{M}}{\sqrt{2}}} - \sqrt{\dfrac{2}{\pi}}\mathcal{M}e^{-\mathcal{M}^2/2}\right] & \text{if $0.8 < \mathcal{M} \leq \mathcal{M}_{eq}$}\\
+0.5\ln\left(1 - \mathcal{M}^{-2}\right) + \ln\Lambda & \text{if $\mathcal{M} > \mathcal{M}_{eq}$}
+\end{matrix}
+\right.
+\end{equation}
+%
+where $M_{eq}$ is the mach number that solves the following equation.
+\begin{equation}\label{eq: machEq}
+\ln\Lambda\left[1.5\left(\erf{\dfrac{\mathcal{M}}{\sqrt{2}}} - \sqrt{\dfrac{2}{\pi}}\mathcal{M}e^{-\mathcal{M}^2/2}\right) - 1\right] - 0.5\ln\left(1 - \mathcal{M}^{-2}\right) = 0.
+\end{equation}
+			
+Numerically solving \autoref{eq: machEq}, yields $M_{eq} \approx 1.731$ for a value of the Coulomb logarithm $\ln\Lambda = 2.3$. 
+
+To summarize, the full acceleration due to dynamical friction is given by the sum of the noncollisional drag on \autoref{eq: df_cl} and \autoref{eq: df_c}.
+		
+\subsection{Accretion onto the black hole}
+			
+			
+We describe the BH growth by accretion assuming the Bondi-Hoyle-Littleton 
+
+\begin{equation}
+	\dot{M}_\bullet^\text{BHL} = \dfrac{4\pi G^2 \rho_GM^2_\bullet}{\left(c_s^2 + v^2\right)^{3/2}},
+\end{equation}
+%
+Where $\rho_G$ corresponds to the gas density. We use the Eddington rate as the upper limit for the accretion rate,
+\begin{equation}
+	\dot{M}_\bullet^\text{Edd} = \dfrac{(1 - \epsilon)M_\bullet}{\epsilon t_\text{Edd}},
+\end{equation}
+%
+with $\epsilon = 0.1$ and $t_\text{Edd} = 0.44 \text{ Gyr}$.
+			
+\subsection{Initial conditions and numerical integration}
+
+The initial inputs for the simulation are the redshift $z_{init}$, the dark matter halo virial mass at that redshift $M_{h}$ and the initial speed for the black hole $v_{init}$. 
+The halo is kept fixed through the simulation. Cosmological acceleration is ignored at all times as it has been found that it only marginally affects black hole orbits \citep{choksi2017recoiling}. 
+
+We carry out the numerical integration  using a leapfrog scheme in the REBOUND library with a timestep fixed to 1000 years.
+The simulation steps when the system destabilizes and starts gaining energy, due to singularities at $x \rightarrow 0$ and $\dot{x} \rightarrow 0$, or if they simply last more than the age of the universe. 
+		
+We define the return time as the time required by the black hole to orbit with maximum distances of less than  $0.01R_\text{vir}$.
+		
+
+\section{Results}
+
+We start with an illustrative result of a BH orbit that started at $z=10$ with $v=25$ km/s in a dark matter halo of $10^{10}\Msun$.
+The dashed line shows the result of 
+
+
+\bibliographystyle{mnras}
+\bibliography{referencias} % if your bibtex file is called example.bib
+
+
+% Alternatively you could enter them by hand, like this:
+% This method is tedious and prone to error if you have lots of references
+%\begin{thebibliography}{99}
+%\bibitem[\protect\citeauthoryear{Author}{2012}]{Author2012}
+%Author A.~N., 2013, Journal of Improbable Astronomy, 1, 1
+%\bibitem[\protect\citeauthoryear{Others}{2013}]{Others2013}
+%Others S., 2012, Journal of Interesting Stuff, 17, 198
+%\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+% Don't change these lines
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}
+
+% End of mnras_template.tex
